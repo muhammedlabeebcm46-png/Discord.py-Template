@@ -4,6 +4,7 @@ import datetime
 from random import choice
 from requests import get
 from asyncio import sleep
+import os
 from os import system
 from discord.ext import commands
 # from keep_alive import keep_alive 
@@ -241,4 +242,4 @@ async def on_message(message): #He does not respond to his own words
 
 
 #Bot Token
-bot.run("BOT TOKEN from https://discord.com/developers/applications")
+bot.run(os.getenv("DISCORD_TOKEN"))
