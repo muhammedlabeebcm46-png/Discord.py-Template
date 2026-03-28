@@ -220,13 +220,19 @@ async def presence_changer(): #Function to change discord presence
 
 
 
-@bot.listen() #Bot is listening to the words
-async def on_message(message): #He does not respond to his own words
-    if message.author == bot.user:
+@bot.listen()
+async def on_message(message):
+    # ignore all bot messages (including itself)
+    if message.author.bot:
         return
 
-    if any(word in message.content for word in "word or {list[]/tuple()/variable}"):
-      await message.channel.send("message")
+    # remove the auto "message" reply
+    # (delete this whole block if you don't want it)
+    # if any(word in message.content for word in ["word1", "word2"]):
+    #     await message.channel.send("message")
+
+    # IMPORTANT: allow .help, .ping, etc.
+    await bot.process_commands(message)
     
     if isinstance(message.channel,discord.DMChannel): #Bot will save every Dm sent to him to a file.
         currentTime = datetime.datetime.now()
